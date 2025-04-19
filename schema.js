@@ -13,7 +13,7 @@ const payloadSchema = {
             items: {
                 type: 'object',
                 properties: {
-                    problem_set: { type: 'number' },
+                    problem_set: { type: 'string' },
                     question: { type: 'number' },
                     testcase: { type: 'number' },
                     result: { type: 'number', enum: [0, 1] },

@@ -8,10 +8,13 @@ const app = express();
 // Middleware to parse JSON requests
 app.use(express.json());
 
-function logResult(student_id, className, problem_set, question, testcase, result) {
-    const message = `s:${student_id}|c:${className}|ps:${problem_set}|q:${question}|t:${testcase}|r:${result}`;
-    logger.info(message);
+function logResult(student_id, class_name, problem_set, question, testcase, result) {
+    logger.info({ message: { student_id, className: class_name, problem_set, question, testcase, result } });
 }
+
+app.get('/', (req, res) => {
+    res.send('Hello World!');
+});
 
 // Endpoint to receive programming assignment results
 app.post('/results', async (req, res, next) => {
