@@ -11,7 +11,9 @@ app.use(cors());
 app.use(express.json());
 
 function logResult(student_id, class_name, problem_set, question, testcase, result) {
-    logger.info({ message: { student_id, className: class_name, problem_set, question, testcase, result } });
+    logger.info({
+        message: { type: 'result', student_id, className: class_name, problem_set, question, testcase, result },
+    });
 }
 
 app.get('/', (req, res) => {
