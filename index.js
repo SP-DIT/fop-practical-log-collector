@@ -3,6 +3,7 @@ import validate from './schema.js';
 import logger from './logger.js';
 import createHttpError from 'http-errors';
 import cors from 'cors';
+import { nanoid } from 'nanoid';
 
 const app = express();
 app.use(cors());
@@ -10,9 +11,21 @@ app.use(cors());
 // Middleware to parse JSON requests
 app.use(express.json());
 
-function logResult(student_id, class_name, problem_set, question, testcase, result) {
-    logger.info({
-        message: { type: 'result', student_id, className: class_name, problem_set, question, testcase, result },
+function logResult(student_id, class_name, results) {
+    const sessionId = nanoid();
+    results.forEach(({ problem_set, question, testcase, result }) => {
+        logger.info({
+            message: {
+                type: 'result',
+                session_id: sessionId,
+                student_id,
+                className: class_name,
+                problem_set,
+                question,
+                testcase,
+                result,
+            },
+        });
     });
 }
 
@@ -24,7 +37,6 @@ app.get('/', (req, res) => {
 app.post('/results', async (req, res, next) => {
     // Validate the payload
     const valid = validate(req.body);
-    console.log(valid, validate.errors);
     if (!valid) {
         return next(createHttpError(400, validate.errorsText()));
     }
@@ -32,9 +44,7 @@ app.post('/results', async (req, res, next) => {
     const { student_id, class: className, results } = req.body;
 
     // Log results to Loki
-    results.forEach(({ problem_set, question, testcase, result }) => {
-        logResult(student_id, className, problem_set, question, testcase, result);
-    });
+    logResult(student_id, className, results);
 
     res.sendStatus(200);
 });

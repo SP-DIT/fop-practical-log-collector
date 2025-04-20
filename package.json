@@ -17,6 +17,7 @@
         "dotenv": "^16.0.0",
         "express": "^5.1.0",
         "http-errors": "^2.0.0",
+        "nanoid": "^5.1.5",
         "winston": "^3.17.0",
         "winston-loki": "^6.1.3"
     }
