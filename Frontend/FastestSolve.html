@@ -125,7 +125,7 @@
                     <th>Time Taken</th>
                   </tr>
                 </thead>
-                <tbody>
+                <!-- <tbody>
                   <tr>
                     <td>1</td>
                     <td>Audrey</td>
@@ -138,6 +138,9 @@
                     <td>DIT/FT/1A/25</td>
                     <td>01:56</td>
                   </tr>
+                </tbody> -->
+                <tbody id="leaderboard-body">
+                  <!-- Data from API will be inserted here -->
                 </tbody>
               </table>
             </div>
@@ -149,6 +152,33 @@
 
     </div>
   </div>
+  <script>
+    fetch('http://localhost:3000/fastest')
+      .then(response => response.json())
+      .then(data => {
+        const tbody = document.getElementById('leaderboard-body');
+        tbody.innerHTML = '';
+  
+        data.forEach(entry => {
+          const totalSeconds = Math.floor(entry.time_seconds);
+          const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
+          const seconds = String(totalSeconds % 60).padStart(2, '0');
+          const formattedTime = `${minutes}:${seconds}`;
+  
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${entry.rank}</td>
+            <td>${entry.name}</td>
+            <td>${entry.class}</td>
+            <td>${formattedTime}</td>
+          `;
+          tbody.appendChild(row);
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching leaderboard data:', error);
+      });
+  </script>  
 </body>
 
 </html>

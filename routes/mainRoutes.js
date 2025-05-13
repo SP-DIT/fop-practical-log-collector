@@ -5,6 +5,7 @@ import classRoutes from './classRoutes.js';
 import questionsRoutes from './questionsRoutes.js';
 import badgesRoutes from './badgesRoutes.js';
 import attmeptsRoutes from './attemptsRoutes.js';
+import fastestRoutes from './fastestRoutes.js'
 
 const router = express.Router();
 
@@ -15,5 +16,6 @@ router.use('/class', classRoutes);
 router.use('/questions', questionsRoutes);
 router.use('/badges', badgesRoutes);
 router.use('/attempts', attmeptsRoutes);
+router.use('/fastest', fastestRoutes);
 
 export default router;
