@@ -14,17 +14,16 @@ app.use(express.json());
 function logResult(student_id, class_name, results) {
     const sessionId = nanoid();
     results.forEach(({ problem_set, question, testcase, result }) => {
-        logger.info({
-            message: {
-                type: 'result',
-                session_id: sessionId,
-                student_id,
-                className: class_name,
-                problem_set,
-                question,
-                testcase,
-                result,
-            },
+        logger.log({
+            level: 'info',
+            type: 'result',
+            session_id: sessionId,
+            student_id,
+            className: class_name,
+            problem_set,
+            question,
+            testcase,
+            result,
         });
     });
 }
