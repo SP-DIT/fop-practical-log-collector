@@ -18,11 +18,13 @@ export const getAllClassRank = async (req, res) => {
   const client = await pool.connect();
   try {
     const result = await client.query(`
-      SELECT users.id, users.class_id, points.question_id, questions.points
+      SELECT SUM (questions.points) AS total_score, class.class
       FROM users
-      JOIN points ON points.user_id = users.class_id
-      JOIN questions ON points.question_id = questions.question_number
-      
+      JOIN points ON points.user_id = users.id
+      JOIN questions ON points.question_id = questions.id
+      JOIN class ON class.id = users.class_id
+      GROUP BY class.class
+      ORDER BY total_score DESC
       `);
     console.log(result.rows);
     res.status(200).json(result.rows);
