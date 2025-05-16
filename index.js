@@ -6,7 +6,7 @@ import cors from 'cors';
 import { nanoid } from 'nanoid';
 
 import attemptRouter from './results.route.js';
-import { addResults } from './results.model.js';
+import { addResult } from './results.model.js';
 
 const app = express();
 app.use(cors());
@@ -22,7 +22,7 @@ function logResult(student_id, class_name, results) {
         class_name,
     }));
     // Send the results to database
-    addResults(resultsWithStudentIdAndClassName);
+    addResult(resultsWithStudentIdAndClassName);
 
     results.forEach(({ problem_set, question, testcase, result }) => {
         logger.log({
@@ -59,7 +59,7 @@ app.post('/results', async (req, res, next) => {
     res.sendStatus(200);
 });
 
-app.use('/attempts', attemptRouter);
+app.use('/results', attemptRouter);
 
 app.use((error, req, res, next) => {
     console.log(error);

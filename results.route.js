@@ -4,7 +4,7 @@ import {
     getResultsByProblemSet,
     getResultsByQuestion,
     getResultsByStudentId,
-} from './results.model';
+} from './results.model.js';
 
 const router = Router();
 
@@ -20,10 +20,10 @@ router.get('/students/:studentId', async (req, res) => {
     }
 });
 // Endpoint to get attempts by class name
-router.get('/classes/:className', async (req, res) => {
-    const { className } = req.params;
+router.get('/classes/:className/problem-sets/:problemSet', async (req, res) => {
+    const { className, problemSet } = req.params;
     try {
-        const attempts = await getResultsByClassNameAndProblemSet(className);
+        const attempts = await getResultsByClassNameAndProblemSet(className, problemSet);
         res.json(attempts);
     } catch (error) {
         console.error(error);

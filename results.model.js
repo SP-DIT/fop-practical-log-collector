@@ -1,11 +1,13 @@
+import pool from './database.js';
+
 export async function addResult(results) {
     const query = `
         INSERT INTO results (student_id, class_name, problem_set, question, testcase, result)
         VALUES ${results
             .map((_, i) => `($${i * 6 + 1}, $${i * 6 + 2}, $${i * 6 + 3}, $${i * 6 + 4}, $${i * 6 + 5}, $${i * 6 + 6})`)
             .join(', ')}
-        ON CONFLICT (student_id, class_name, problem_set, question, testcase)
-        DO UPDATE SET result = GREATEST(results.result, EXCLUDED.result)
+        ON CONFLICT (student_id, problem_set, question, testcase)
+        DO UPDATE SET result = results.result OR EXCLUDED.result
     `;
     const values = results.flatMap((r) => [
         r.student_id,
@@ -15,7 +17,8 @@ export async function addResult(results) {
         r.testcase,
         r.result,
     ]);
-    const result = await db.query(query, values);
+    const result = await pool.query(query, values);
+    console.log(result);
     return result.rowCount;
 }
 
@@ -24,7 +27,7 @@ export async function getResultsByStudentId(studentId) {
         SELECT * FROM results WHERE student_id = $1
     `;
     const values = [studentId];
-    const result = await db.query(query, values);
+    const result = await pool.query(query, values);
     return result.rows;
 }
 export async function getResultsByClassNameAndProblemSet(className, problemSet) {
@@ -32,7 +35,7 @@ export async function getResultsByClassNameAndProblemSet(className, problemSet) 
         SELECT * FROM results WHERE class_name = $1 AND problem_set = $2
     `;
     const values = [className, problemSet];
-    const result = await db.query(query, values);
+    const result = await pool.query(query, values);
     return result.rows;
 }
 export async function getResultsByProblemSet(problemSet) {
@@ -40,7 +43,7 @@ export async function getResultsByProblemSet(problemSet) {
         SELECT * FROM results WHERE problem_set = $1
     `;
     const values = [problemSet];
-    const result = await db.query(query, values);
+    const result = await pool.query(query, values);
     return result.rows;
 }
 export async function getResultsByQuestion(problemSet, question) {
@@ -48,6 +51,6 @@ export async function getResultsByQuestion(problemSet, question) {
         SELECT * FROM results WHERE problem_set = $1 AND question = $2
     `;
     const values = [problemSet, question];
-    const result = await db.query(query, values);
+    const result = await pool.query(query, values);
     return result.rows;
 }
