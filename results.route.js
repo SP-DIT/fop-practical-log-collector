@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import {
-    getAttemptsByClassNameAndProblemSet,
-    getAttemptsByProblemSet,
-    getAttemptsByQuestion,
-    getAttemptsByStudentId,
-} from './attempt.model';
+    getResultsByClassNameAndProblemSet,
+    getResultsByProblemSet,
+    getResultsByQuestion,
+    getResultsByStudentId,
+} from './results.model';
 
 const router = Router();
 
@@ -12,7 +12,7 @@ const router = Router();
 router.get('/students/:studentId', async (req, res) => {
     const { studentId } = req.params;
     try {
-        const attempts = await getAttemptsByStudentId(studentId);
+        const attempts = await getResultsByStudentId(studentId);
         res.json(attempts);
     } catch (error) {
         console.error(error);
@@ -23,7 +23,7 @@ router.get('/students/:studentId', async (req, res) => {
 router.get('/classes/:className', async (req, res) => {
     const { className } = req.params;
     try {
-        const attempts = await getAttemptsByClassNameAndProblemSet(className);
+        const attempts = await getResultsByClassNameAndProblemSet(className);
         res.json(attempts);
     } catch (error) {
         console.error(error);
@@ -34,7 +34,7 @@ router.get('/classes/:className', async (req, res) => {
 router.get('/problem-sets/:problemSet', async (req, res) => {
     const { problemSet } = req.params;
     try {
-        const attempts = await getAttemptsByProblemSet(problemSet);
+        const attempts = await getResultsByProblemSet(problemSet);
         res.json(attempts);
     } catch (error) {
         console.error(error);
@@ -45,7 +45,7 @@ router.get('/problem-sets/:problemSet', async (req, res) => {
 router.get('/problem-sets/:problemSet/questions/:question', async (req, res) => {
     const { problemSet, question } = req.params;
     try {
-        const attempts = await getAttemptsByQuestion(problemSet, question);
+        const attempts = await getResultsByQuestion(problemSet, question);
         res.json(attempts);
     } catch (error) {
         console.error(error);
