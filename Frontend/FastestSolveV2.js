@@ -25,4 +25,3 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('Error fetching leaderboard data:', error);
       });
   });
-  
