@@ -35,3 +35,27 @@ export const getAllClassRank = async (req, res) => {
     client.release();
   }
 };
+
+export const addUserWithPoints = async (req, res) => {
+  const { name, class_id, question_id } = req.body;
+  const client = await pool.connect();
+  try {
+    const userResult = await client.query(
+      'INSERT INTO users (name, class_id) VALUES ($1, $2) RETURNING id',
+      [name, class_id]
+    );
+    const userId = userResult.rows[0].id;
+
+    await client.query(
+      'INSERT INTO points (user_id, question_id) VALUES ($1, $2)',
+      [userId, question_id]
+    );
+
+    res.status(201).json({ message: 'User and points added successfully.' });
+  } catch (error) {
+    console.error('Error inserting data:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  } finally {
+    client.release();
+  }
+};
