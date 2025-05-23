@@ -19,12 +19,10 @@ import mainRoutes from './routes/mainRoutes.js';
 
 
 const app = express();
-app.use('/', mainRoutes);
+// Add middleware to parse JSON and URL-encoded bodies
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
-});
 
 //giving the path and directory to show the user
 const __filename = fileURLToPath(import.meta.url);
@@ -34,3 +32,14 @@ const __dirname = path.dirname(__filename);
 app.use(express.static(path.join(__dirname, 'Frontend')));
 
 
+// Serve signup.html when accessing root URL
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'Frontend', 'signup.html'));
+});
+
+app.use('/', mainRoutes);
+
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`);
+});
