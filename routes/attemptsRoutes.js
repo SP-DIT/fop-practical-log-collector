@@ -1,9 +1,12 @@
-// routes/attemptsRoutes.js
 import express from 'express';
-import { getAllAttempts } from '../controller/attemptsController.js';
+import {
+  getAllAttempts,
+  getAverageAttemptsByTopic
+} from '../controller/attemptsController.js';
 
 const router = express.Router();
 
 router.get('/', getAllAttempts);
+router.get('/average-attempts', getAverageAttemptsByTopic);
 
 export default router;
