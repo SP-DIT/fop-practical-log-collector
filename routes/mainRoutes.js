@@ -6,6 +6,7 @@ import questionsRoutes from './questionsRoutes.js';
 import badgesRoutes from './badgesRoutes.js';
 import attmeptsRoutes from './attemptsRoutes.js';
 import fastestRoutes from './fastestRoutes.js'
+import attemptsRoutes from './attemptsRoutes.js';
 
 const router = express.Router();
 
@@ -15,6 +16,7 @@ router.use('/points', pointsRoutes);
 router.use('/class', classRoutes);
 router.use('/questions', questionsRoutes);
 router.use('/badges', badgesRoutes);
+router.use('/attempts', attemptsRoutes);
 router.use('/attempts', attmeptsRoutes);
 router.use('/fastest', fastestRoutes);
 
