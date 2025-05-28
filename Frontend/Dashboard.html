@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .dashboard-card {
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      padding: 1rem;
+      margin-bottom: 1rem;
+      background: #ffffff;
+    }
+    .progress-bar-striped {
+      background-color: #00bcd4;
+    }
+    .badge-placeholder {
+      width: 40px;
+      height: 40px;
+      background-color: #dee2e6;
+      border-radius: 50%;
+      display: inline-block;
+      margin: 5px;
+    }
+  </style>
+</head>
+<body class="bg-light">
+  <div class="container my-4">
+    <div class="row">
+      <!-- Left Panel -->
+      <div class="col-md-4">
+        <div class="dashboard-card text-center">
+          <h4>John Doe</h4>
+          <p class="text-muted">Class: DIT/FT/1B/25</p>
+
+          <h6>Monthly Score</h6>
+          <h3>850</h3>
+          <p>Total Score: 12,300</p>
+
+          <hr>
+          <h6>Streak</h6>
+          <p>🔥 7 days</p>
+
+          <hr>
+          <h6>Rank</h6>
+          <p>#5 <br><small>Top 10%<br>Class: 12 | Cohort: 60</small></p>
+
+          <hr>
+          <h6>Difficulty Breakdown</h6>
+          <p>Easy</p>
+          <div class="progress mb-2"><div class="progress-bar progress-bar-striped" style="width: 60%;"></div></div>
+          <p>Medium</p>
+          <div class="progress mb-2"><div class="progress-bar progress-bar-striped" style="width: 40%;"></div></div>
+          <p>Hard</p>
+          <div class="progress mb-2"><div class="progress-bar progress-bar-striped" style="width: 20%;"></div></div>
+
+          <hr>
+          <h6>Badges</h6>
+          <div>
+            <span class="badge-placeholder"></span>
+            <span class="badge-placeholder"></span>
+            <span class="badge-placeholder"></span><br>
+            <span class="badge-placeholder"></span>
+            <span class="badge-placeholder"></span>
+            <span class="badge-placeholder"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Panel -->
+      <div class="col-md-8">
+        <div class="dashboard-card">
+          <h5>Topic Accuracy</h5>
+          <select class="form-select mb-3" id="accuracyDropdown">
+            <option selected>Choose topic</option>
+            <option value="loops">Loops - 85%</option>
+            <option value="conditionals">Conditionals - 90%</option>
+            <option value="functions">Functions - 75%</option>
+          </select>
+          <p>Accuracy for selected topic: <strong>85%</strong></p>
+        </div>
+
+        <div class="dashboard-card">
+          <h5>Weekly Notification</h5>
+          <div class="alert alert-info">
+            💬 You've improved your accuracy in <strong>Loops</strong> by <strong>20%</strong> since last week!
+          </div>
+        </div>
+
+        <!-- Placeholder for leaderboard tabs if needed -->
+        <div class="dashboard-card">
+          <h5>Leaderboard</h5>
+          <p>Coming soon...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
