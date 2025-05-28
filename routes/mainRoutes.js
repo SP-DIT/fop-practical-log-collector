@@ -17,7 +17,6 @@ router.use('/class', classRoutes);
 router.use('/questions', questionsRoutes);
 router.use('/badges', badgesRoutes);
 router.use('/attempts', attemptsRoutes);
-router.use('/attempts', attmeptsRoutes);
 router.use('/fastest', fastestRoutes);
 
 export default router;

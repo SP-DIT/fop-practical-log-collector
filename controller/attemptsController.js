@@ -18,16 +18,19 @@ export const getAverageAttemptsByTopic = async (req, res) => {
   try {
     const result = await client.query(`
       SELECT
-        RANK() OVER (PARTITION BY q.topic ORDER BY SUM(a.attempts)::float / COUNT(DISTINCT a.question_id)) AS rank,
+        RANK() OVER (
+          PARTITION BY q.topic 
+          ORDER BY SUM(a.attempts)::float / COUNT(DISTINCT a.question_id)
+        ) AS rank,
         u.name,
-        c.class,
+        c.class AS class,
         q.topic,
-        ROUND(SUM(a.attempts)::float / COUNT(DISTINCT a.question_id), 2) AS average_attempts
+        ROUND(SUM(a.attempts)::numeric / COUNT(DISTINCT a.question_id), 2) AS average_attempts
       FROM
-        Attempts a
-      JOIN "User" u ON a.user_id = u.id
-      JOIN Class c ON u.class_id = c.id
-      JOIN Question q ON a.question_id = q.id
+        attempts a
+      JOIN users u ON a.user_id = u.id
+      JOIN class c ON u.class_id = c.id
+      JOIN questions q ON a.question_id = q.id
       GROUP BY
         u.name, c.class, q.topic
       ORDER BY

@@ -4,27 +4,31 @@ document.addEventListener('DOMContentLoaded', () => {
   let attemptsData = [];
 
   function renderTable(topic) {
-    const filtered = attemptsData
-      .filter(row => row.topic.toLowerCase() === topic.toLowerCase())
-      .sort((a, b) => a.average_attempts - b.average_attempts);
+  console.log("Selected topic:", topic);
+  console.log("Available topics:", attemptsData.map(row => row.topic));
 
-    tableBody.innerHTML = '';
+  const filtered = attemptsData
+    .filter(row => row.topic === topic)
+    .sort((a, b) => a.average_attempts - b.average_attempts);
 
-    if (filtered.length === 0) {
-      tableBody.innerHTML = `<tr><td colspan="4">No data available</td></tr>`;
-    } else {
-      filtered.forEach(entry => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td>${entry.rank}</td>
-          <td>${entry.name}</td>
-          <td>${entry.class}</td>
-          <td>${entry.average_attempts}</td>
-        `;
-        tableBody.appendChild(tr);
-      });
-    }
+  tableBody.innerHTML = '';
+
+  if (filtered.length === 0) {
+    tableBody.innerHTML = `<tr><td colspan="4">No data available</td></tr>`;
+  } else {
+    filtered.forEach(entry => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${entry.rank}</td>
+        <td>${entry.name}</td>
+        <td>${entry.class}</td>
+        <td>${entry.average_attempts}</td>
+      `;
+      tableBody.appendChild(tr);
+    });
   }
+}
+
 
   fetch('/attempts/average-attempts')
     .then(res => res.json())
