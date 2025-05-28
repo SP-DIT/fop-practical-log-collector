@@ -5,6 +5,9 @@ import createHttpError from 'http-errors';
 import cors from 'cors';
 import { nanoid } from 'nanoid';
 
+import attemptRouter from './results.route.js';
+import { addResult } from './results.model.js';
+
 const app = express();
 app.use(cors());
 
@@ -13,18 +16,25 @@ app.use(express.json());
 
 function logResult(student_id, class_name, results) {
     const sessionId = nanoid();
+    const resultsWithStudentIdAndClassName = results.map((result) => ({
+        ...result,
+        student_id,
+        class_name,
+    }));
+    // Send the results to database
+    addResult(resultsWithStudentIdAndClassName);
+
     results.forEach(({ problem_set, question, testcase, result }) => {
-        logger.info({
-            message: {
-                type: 'result',
-                session_id: sessionId,
-                student_id,
-                className: class_name,
-                problem_set,
-                question,
-                testcase,
-                result,
-            },
+        logger.log({
+            level: 'info',
+            type: 'result',
+            session_id: sessionId,
+            student_id,
+            className: class_name,
+            problem_set,
+            question,
+            testcase,
+            result,
         });
     });
 }
@@ -48,6 +58,8 @@ app.post('/results', async (req, res, next) => {
 
     res.sendStatus(200);
 });
+
+app.use('/results', attemptRouter);
 
 app.use((error, req, res, next) => {
     console.log(error);
