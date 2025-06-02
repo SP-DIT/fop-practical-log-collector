@@ -53,8 +53,10 @@ app.post('/results', async (req, res, next) => {
 
     const { student_id, class: className, results } = req.body;
 
+    console.log(`Detected Student Id: `, student_id, `Classname:`, className);
+
     // Log results to Loki
-    logResult(student_id, className, results);
+    // logResult(student_id, className, results);
 
     res.sendStatus(200);
 });
