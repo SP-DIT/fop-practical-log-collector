@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,7 +19,7 @@
     .progress-bar-striped {
       background-color: #00bcd4;
     }
-    
+
     .badge-placeholder {
       width: 40px;
       height: 40px;
@@ -44,8 +44,9 @@
     .day-box {
       width: 40px;
       height: 40px;
-      background-color: #d3d3d3;
-      color: #000;
+      border: 1px solid black;
+      background-color: #fff;
+      color: #150707;
       font-size: 12px;
       font-weight: 500;
       text-align: center;
@@ -54,7 +55,6 @@
       justify-content: center;
       border-radius: 4px;
     }
-    
   </style>
 </head>
 
@@ -101,7 +101,7 @@
           <p class="mb-1">7 days</p>
           <p>Longest Streak: 12 days</p>
 
-          <div class="bg-secondary text-white p-3 rounded">
+          <div class="text-white p-3 rounded" style="background-color: #fe7c3b;">
             <h6 class="mb-3">Weekly Goal</h6>
             <div class="d-flex flex-wrap justify-content-start gap-2 overflow-auto">
               <div class="day-box">Mon</div>
@@ -159,18 +159,18 @@
           <div class="container-fluid">
             <div class="row mb-3 justify-content-center">
               <ul class="d-flex list-unstyled gap-3">
-                <li class="text-center px-4 py-2 border border-secondary bg-secondary rounded">Monthly Score:</li>
-                <li class="text-center px-4 py-2 border border-secondary bg-secondary rounded">Lifetime Score:</li>
-                <li class="text-center px-4 py-2 border border-secondary bg-secondary rounded">Challenges Solved:</li>
-                <li class="text-center px-4 py-2 border border-secondary bg-secondary rounded">Rank:</li>
-                <li class="text-center px-4 py-2 border border-secondary bg-secondary rounded">Percentile:</li>
+                <li class="text-center px-4 py-2 border border-secondary bg-warning rounded">Monthly Score:</li>
+                <li class="text-center px-4 py-2 border border-secondary bg-warning rounded">Lifetime Score:</li>
+                <li class="text-center px-4 py-2 border border-secondary bg-warning rounded">Challenges Solved:</li>
+                <li class="text-center px-4 py-2 border border-secondary bg-warning rounded">Rank:</li>
+                <li class="text-center px-4 py-2 border border-secondary bg-warning rounded">Percentile:</li>
               </ul>
             </div>
           </div>
         </div>
 
         <div class="container-fluid">
-          <div class="row mb-3 justify-content-center border border-secondary bg-secondary rounded">
+          <div class="row mb-3 justify-content-center border border-secondary rounded">
             <ul class="d-flex list-unstyled w-100 justify-content-between px-0 mb-0">
               <li class="text-center px-4 py-2 flex-fill">Rank</li>
               <li class="text-center px-4 py-2 flex-fill">Name</li>
@@ -181,7 +181,7 @@
         </div>
 
         <div class="container-fluid">
-          <div class="row mb-3 justify-content-center border border-secondary bg-secondary rounded">
+          <div class="row mb-3 justify-content-center border border-secondary bg-warning-subtle rounded">
             <h3>Badges:</h3>
             <ul class="d-flex list-unstyled gap-3">
               <li class="text-center px-4 py-2">

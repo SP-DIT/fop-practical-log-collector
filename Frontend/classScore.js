@@ -17,10 +17,10 @@ document.addEventListener("DOMContentLoaded", function () {
             } else {
                 // Compare score with previous one
                 if (item.total_score === responseData[index - 1].total_score) {
-                    // Same score → same rank
+                    // Same score -> same rank
                     rank = ranks[index - 1];
                 } else {
-                    // Different score → rank is index + 1
+                    // Different score  -> rank is index + 1
                     rank = index + 1;
                 }
             }
