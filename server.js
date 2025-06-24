@@ -34,7 +34,7 @@ app.use(express.static(path.join(__dirname, 'Frontend')));
 
 // Serve signup.html when accessing root URL
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'Frontend', 'signup.html'));
+  res.sendFile(path.join(__dirname, 'Frontend', 'login.html'));
 });
 
 app.use('/', mainRoutes);

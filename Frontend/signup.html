@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -54,7 +55,7 @@
     .container button {
       width: 100%;
       padding: 12px;
-      background: #4caf50;
+      background: #d42892;
       color: white;
       border: none;
       border-radius: 8px;
@@ -66,17 +67,23 @@
     }
 
     .container button:hover {
-      background: #388e3c;
+      background: #7300bb;
     }
   </style>
 </head>
+
 <body>
   <div class="container">
     <h2>Create Account</h2>
-    <input type="text" placeholder="Username" />
-    <input type="email" placeholder="iChat Email" />
-    <input type="text" placeholder="Class"> 
-    <button>Sign Up</button>
+    <form action="/signup" method="POST">
+      <input type="text" name="name" placeholder="Username" required />
+      <input type="email" name="ichat" placeholder="iChat Email" required />
+      <input type="text" name="className" placeholder="Class" required />
+      <button type="submit">Sign Up</button>
+    </form>
   </div>
+
+
 </body>
+
 </html>
