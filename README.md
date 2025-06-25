@@ -1,1 +1,0 @@
-# fop-practical-log-collector
