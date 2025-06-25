@@ -20,8 +20,15 @@ export const handleLogin = async (req, res) => {
       return res.status(401).send('Invalid credentials. Please try again.');
     }
 
-    // Successful login, redirect to dashboard or desired page
-    res.redirect('/FastestSolve.html');
+    // Set user session upon successful login
+    req.session.user = {
+      id: result.rows[0].id,
+      name: result.rows[0].name,
+      ichat: result.rows[0].ichat
+    };
+
+    // Successful login, redirect to dashboard
+    res.redirect('/dashboard');
   } catch (error) {
     console.error('Login error:', error);
     res.status(500).send('Internal Server Error');
