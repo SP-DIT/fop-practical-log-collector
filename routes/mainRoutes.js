@@ -7,6 +7,8 @@ import badgesRoutes from './badgesRoutes.js';
 import attmeptsRoutes from './attemptsRoutes.js';
 import fastestRoutes from './fastestRoutes.js'
 import attemptsRoutes from './attemptsRoutes.js';
+import signupRoutes from './signupRoutes.js';
+import loginRoutes from './loginRoutes.js';
 
 const router = express.Router();
 
@@ -18,5 +20,7 @@ router.use('/questions', questionsRoutes);
 router.use('/badges', badgesRoutes);
 router.use('/attempts', attemptsRoutes);
 router.use('/fastest', fastestRoutes);
+router.use('/', signupRoutes);
+router.use('/', loginRoutes);
 
 export default router;
