@@ -24,15 +24,21 @@ export const handleSignup = async (req, res) => {
             classId = insertClass.rows[0].id;
         }
 
-
         // 3. Insert user with class_id
-        await client.query(
-            'INSERT INTO users (name, ichat, class_id) VALUES ($1, $2, $3)',
+        const userResult = await client.query(
+            'INSERT INTO users (name, ichat, class_id) VALUES ($1, $2, $3) RETURNING id, name, ichat',
             [name, ichat, classId]
         );
 
-        // 4. Redirect
-        res.redirect('/FastestSolve.html');
+        // 4. Set user session upon successful signup
+        req.session.user = {
+            id: userResult.rows[0].id,
+            name: userResult.rows[0].name,
+            ichat: userResult.rows[0].ichat
+        };
+
+        // 5. Redirect to dashboard
+        res.redirect('/dashboard');
 
     } catch (error) {
         console.error('Error during signup:', error);
