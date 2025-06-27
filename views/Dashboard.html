@@ -101,7 +101,7 @@
           <p class="mb-1">7 days</p>
           <p>Longest Streak: 12 days</p>
 
-          <div class="text-white p-3 rounded" style="background-color: #fe7c3b;">
+          <div class="text-white p-3 rounded bg-warning">
             <h6 class="mb-3">Weekly Goal</h6>
             <div class="d-flex flex-wrap justify-content-start gap-2 overflow-auto">
               <div class="day-box">Mon</div>
@@ -115,7 +115,7 @@
           </div>
         </div>
 
-        <div class="bg-light p-3 rounded mb-3">
+        <div class="bg-light p-3 rounded mb-3 rounded">
           <h6 class="mb-3">Topic Accuracy</h6>
           <select class="form-select mb-3 w-100" id="accuracyDropdown">
             <option selected disabled>Choose topic</option>
@@ -126,7 +126,7 @@
           <p id="accuracyResult">Accuracy for selected topic: <strong>—</strong></p>
         </div>
 
-        <div class="bg-light p-2 mb-3 text-start">
+        <div class="bg-light p-2 mb-3 text-start rounded">
           <p class="mb-2">Difficulty</p>
 
           <!-- the difficulty will be measured under accuracy in the future, e.g how 70% accuracy as the bar -->
@@ -157,32 +157,95 @@
 
         <div class="col-md-9 p-3">
           <div class="container-fluid">
-            <div class="row mb-3 justify-content-center">
-              <ul class="d-flex list-unstyled gap-3">
-                <li class="text-center px-4 py-2 border border-secondary bg-warning rounded">Monthly Score:</li>
-                <li class="text-center px-4 py-2 border border-secondary bg-warning rounded">Lifetime Score:</li>
-                <li class="text-center px-4 py-2 border border-secondary bg-warning rounded">Challenges Solved:</li>
-                <li class="text-center px-4 py-2 border border-secondary bg-warning rounded">Rank:</li>
-                <li class="text-center px-4 py-2 border border-secondary bg-warning rounded">Percentile:</li>
-              </ul>
+            <div class="row mb-3 justify-content-center gap-3">
+
+              <!-- Card 1 -->
+              <div class="col-md-2 p-3 bg-white border rounded-4 shadow-sm text-center bg-danger-subtle">
+                <p class="mb-1 text-muted">Monthly Score</p>
+                <br>
+                <h3 class="mb-1">745</h3>
+              </div>
+
+              <!-- Card 2 -->
+              <div class="col-md-2 p-3 bg-white border rounded-4 shadow-sm text-center bg-danger-subtle">
+                <p class="mb-1 text-muted">Lifetime Score</p>
+                <br>
+                <h3 class="mb-1">3120</h3>
+              </div>
+
+              <!-- Card 3 -->
+              <div class="col-md-2 p-3 bg-white border rounded-4 shadow-sm text-center bg-danger-subtle">
+                <p class="mb-1 text-muted">Challenges Solved</p>
+                <br>
+                <h3 class="mb-1">58</h3>
+              </div>
+
+              <!-- Card 4 -->
+              <div class="col-md-2 p-3 bg-white border rounded-4 shadow-sm text-center bg-danger-subtle">
+                <p class="mb-1 text-muted">Rank</p>
+                <br>
+                <h3 class="mb-1">#12</h3>
+              </div>
+
+              <!-- Card 5 -->
+              <div class="col-md-2 p-3 bg-white border rounded-4 shadow-sm text-center bg-danger-subtle">
+                <p class="mb-1 text-muted">Percentile</p>
+                <br>
+                <h3 class="mb-1">92%</h3>
+              </div>
+
             </div>
           </div>
         </div>
 
-        <div class="container-fluid">
-          <div class="row mb-3 justify-content-center border border-secondary rounded">
-            <ul class="d-flex list-unstyled w-100 justify-content-between px-0 mb-0">
-              <li class="text-center px-4 py-2 flex-fill">Rank</li>
-              <li class="text-center px-4 py-2 flex-fill">Name</li>
-              <li class="text-center px-4 py-2 flex-fill">Class</li>
-              <li class="text-center px-4 py-2 flex-fill">Score</li>
-            </ul>
-          </div>
-        </div>
 
         <div class="container-fluid">
-          <div class="row mb-3 justify-content-center border border-secondary bg-warning-subtle rounded">
-            <h3>Badges:</h3>
+          <div class="row justify-content-center">
+            <div class="col-md-10">
+              <div class="p-0 border rounded-3 bg-white overflow-hidden">
+
+                <!-- Header row -->
+                <ul class="d-flex list-unstyled w-100 justify-content-between px-0 mb-0 bg-light border-bottom">
+                  <li class="text-center px-4 py-2 flex-fill fw-bold">Rank</li>
+                  <li class="text-center px-4 py-2 flex-fill fw-bold">Name</li>
+                  <li class="text-center px-4 py-2 flex-fill fw-bold">Class</li>
+                  <li class="text-center px-4 py-2 flex-fill fw-bold">Score</li>
+                </ul>
+
+                <!-- Row 1 -->
+                <ul class="d-flex list-unstyled w-100 justify-content-between px-0 mb-0 border-bottom">
+                  <li class="text-center px-4 py-2 flex-fill">1</li>
+                  <li class="text-center px-4 py-2 flex-fill">Alice Tan</li>
+                  <li class="text-center px-4 py-2 flex-fill">DIT/FT/1A/01</li>
+                  <li class="text-center px-4 py-2 flex-fill">95</li>
+                </ul>
+
+                <!-- Row 2 -->
+                <ul class="d-flex list-unstyled w-100 justify-content-between px-0 mb-0 border-bottom">
+                  <li class="text-center px-4 py-2 flex-fill">2</li>
+                  <li class="text-center px-4 py-2 flex-fill">Bryan Lee</li>
+                  <li class="text-center px-4 py-2 flex-fill">DIT/FT/1A/03</li>
+                  <li class="text-center px-4 py-2 flex-fill">90</li>
+                </ul>
+
+                <!-- Row 3 -->
+                <ul class="d-flex list-unstyled w-100 justify-content-between px-0 mb-0">
+                  <li class="text-center px-4 py-2 flex-fill">3</li>
+                  <li class="text-center px-4 py-2 flex-fill">Chloe Ng</li>
+                  <li class="text-center px-4 py-2 flex-fill">DIT/FT/1A/02</li>
+                  <li class="text-center px-4 py-2 flex-fill">88</li>
+                </ul>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+
+
+        <div class="container-fluid">
+          <div class="row mb-3 justify-content-center bg-warning-subtle rounded bg-white border rounded-4 shadow-sm">
+            <h3>Badges</h3>
             <ul class="d-flex list-unstyled gap-3">
               <li class="text-center px-4 py-2">
                 Persistent Solver<br>
