@@ -8,11 +8,11 @@ import { nanoid } from 'nanoid';
 import attemptRouter from './results.route.js';
 import { addResult } from './results.model.js';
 
-const app = express();
-app.use(cors());
+// const app = express();
+// app.use(cors());
 
-// Middleware to parse JSON requests
-app.use(express.json());
+// // Middleware to parse JSON requests
+// app.use(express.json());
 
 function logResult(student_id, class_name, results) {
     const sessionId = nanoid();
@@ -39,17 +39,17 @@ function logResult(student_id, class_name, results) {
     });
 }
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
+// app.get('/', (req, res) => {
+//     res.send('Hello World!');
+// });
 
-// Endpoint to receive programming assignment results
-app.post('/results', async (req, res, next) => {
-    // Validate the payload
-    const valid = validate(req.body);
-    if (!valid) {
-        return next(createHttpError(400, validate.errorsText()));
-    }
+// // Endpoint to receive programming assignment results
+// app.post('/results', async (req, res, next) => {
+//     // Validate the payload
+//     const valid = validate(req.body);
+//     if (!valid) {
+//         return next(createHttpError(400, validate.errorsText()));
+//     }
 
     const { student_id, class: className, results } = req.body;
 
@@ -63,10 +63,10 @@ app.post('/results', async (req, res, next) => {
 
 app.use('/results', attemptRouter);
 
-app.use((error, req, res, next) => {
-    console.log(error);
-    logger.error(error.message || 'Internal Server Error');
-    res.status(error.status || 500).json({ error: error.message || 'Internal Server Error' });
-});
+// app.use((error, req, res, next) => {
+//     console.log(error);
+//     logger.error(error.message || 'Internal Server Error');
+//     res.status(error.status || 500).json({ error: error.message || 'Internal Server Error' });
+// });
 
-export default app;
+// export default app;
