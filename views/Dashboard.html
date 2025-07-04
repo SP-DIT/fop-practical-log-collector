@@ -21,8 +21,8 @@
     }
 
     .badge-placeholder {
-      width: 40px;
-      height: 40px;
+      width: 80px;
+      height: 80px;
       background-color: #dee2e6;
       border-radius: 50%;
       display: inline-block;
@@ -30,8 +30,8 @@
     }
 
     .profile-pic {
-      width: 100px;
-      height: 100px;
+      width: 150px;
+      height: 150px;
       object-fit: cover;
       background-color: #cfd8dc;
       border-radius: 50%;
@@ -54,6 +54,16 @@
       align-items: center;
       justify-content: center;
       border-radius: 4px;
+    }
+
+    .card-box {
+      min-width: 200px;
+      max-width: 250px;
+      word-wrap: break-word;
+      text-align: center;
+      padding: 1rem;
+      border-radius: 1rem;
+      overflow-wrap: break-word;
     }
   </style>
 </head>
@@ -95,16 +105,20 @@
           ☰
         </button>
 
-        <div class="profile-pic mb-3"></div>
-        <h5>Name: John Doe</h5>
-        <h5>Class: DIT/FT/1B/25</h5>
+        <div class="mb-3 text-center">
+          <img class="profile-pic" src="/pics/cat.webp" alt="Cat Image">
+        </div>
+
+
+        <h5 class="m-2">Name: Audrey</h5>
+        <h5 class="m-2">Class: DIT/FT/1B/25</h5>
 
         <div class="bg-light p-3 mb-3 bg-white border rounded-4 shadow-sm">
-          <h6>Streak:</h6>
+          <h5>Streak:</h5>
           <p class="mb-1">7 days</p>
           <p>Longest Streak: 12 days</p>
 
-          <div class="text-white p-3 rounded bg-warning">
+          <div class="text-black p-3 rounded bg-danger-subtle">
             <h6 class="mb-3">Weekly Goal</h6>
             <div class="d-flex flex-wrap justify-content-start gap-2 overflow-auto">
               <div class="day-box">Mon</div>
@@ -130,7 +144,7 @@
         </div>
 
         <div class="bg-light p-2 mb-3 text-start bg-white border rounded-4 shadow-sm">
-          <p class="mb-2">Difficulty</p>
+          <h5 class="mb-2 mr-2">Difficulty</h5>
 
           <!-- the difficulty will be measured under accuracy in the future, e.g how 70% accuracy as the bar -->
 
@@ -160,38 +174,38 @@
 
         <div class="col-md-9 p-3">
           <div class="container-fluid">
-            <div class="row mb-3 justify-content-center gap-3">
+            <div class="row mb-3 justify-content-center gap-3 flex-wrap">
 
               <!-- Card 1 -->
-              <div class="col-md-2 p-3 bg-white border rounded-4 shadow-sm text-center bg-danger-subtle">
+              <div class="col-md-2 p-3 card-box bg-white border rounded-4 shadow-sm text-center bg-danger-subtle">
                 <p class="mb-1 text-muted">Monthly Score</p>
                 <br>
                 <h3 class="mb-1">745</h3>
               </div>
 
               <!-- Card 2 -->
-              <div class="col-md-2 p-3 bg-white border rounded-4 shadow-sm text-center bg-danger-subtle">
+              <div class="col-md-2 p-3 card-box bg-white border rounded-4 shadow-sm text-center bg-danger-subtle">
                 <p class="mb-1 text-muted">Lifetime Score</p>
                 <br>
                 <h3 class="mb-1">3120</h3>
               </div>
 
               <!-- Card 3 -->
-              <div class="col-md-2 p-3 bg-white border rounded-4 shadow-sm text-center bg-danger-subtle">
+              <div class="col-md-2 p-3 card-box bg-white border rounded-4 shadow-sm text-center bg-danger-subtle">
                 <p class="mb-1 text-muted">Challenges Solved</p>
                 <br>
                 <h3 class="mb-1">58</h3>
               </div>
 
               <!-- Card 4 -->
-              <div class="col-md-2 p-3 bg-white border rounded-4 shadow-sm text-center bg-danger-subtle">
+              <div class="col-md-2 p-3 card-box bg-white border rounded-4 shadow-sm text-center bg-danger-subtle">
                 <p class="mb-1 text-muted">Rank</p>
                 <br>
                 <h3 class="mb-1">#12</h3>
               </div>
 
               <!-- Card 5 -->
-              <div class="col-md-2 p-3 bg-white border rounded-4 shadow-sm text-center bg-danger-subtle">
+              <div class="col-md-2 p-3 card-box bg-white border rounded-4 shadow-sm text-center bg-danger-subtle">
                 <p class="mb-1 text-muted">Percentile</p>
                 <br>
                 <h3 class="mb-1">92%</h3>
@@ -247,24 +261,25 @@
 
 
         <div class="container-fluid">
-          <div class="row mb-3 justify-content-center bg-warning-subtle rounded bg-white border rounded-4 shadow-sm">
+          <div
+            class="row mb-3 justify-content-center bg-warning-subtle rounded bg-white border rounded-4 shadow-sm p-5">
             <h3>Badges</h3>
-            <ul class="d-flex list-unstyled gap-3">
+            <ul class="d-flex flex-wrap list-unstyled gap-3">
               <li class="text-center px-4 py-2">
                 Persistent Solver<br>
-                <span class="badge-placeholder"></span>
+                <img class="badge-placeholder" src="/pics/train.jpeg" alt="Train Image">
               </li>
               <li class="text-center px-4 py-2">
                 Never Give Up<br>
-                <span class="badge-placeholder"></span>
+                <img class="badge-placeholder" src="/pics/mountain.jpeg" alt="Mountain Image">
               </li>
               <li class="text-center px-4 py-2">
                 Daily Streaker<br>
-                <span class="badge-placeholder"></span>
+                <img class="badge-placeholder" src="/pics/sunset.jpeg" alt="Sun Image">
               </li>
               <li class="text-center px-4 py-2">
                 Foundation builder<br>
-                <span class="badge-placeholder"></span>
+                <img class="badge-placeholder" src="/pics/tent.jpeg" alt="Tent Image">
               </li>
             </ul>
           </div>

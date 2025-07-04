@@ -1,57 +1,74 @@
-// import express from 'express';
-// import validate from './schema.js';
-// import logger from './logger.js';
-// import createHttpError from 'http-errors';
-// import cors from 'cors';
-// import { nanoid } from 'nanoid';
 
-// const app = express();
-// app.use(cors());
+import express from 'express';
+import validate from './schema.js';
+import logger from './logger.js';
+import createHttpError from 'http-errors';
+import cors from 'cors';
+import { nanoid } from 'nanoid';
 
-// // Middleware to parse JSON requests
-// app.use(express.json());
+import attemptRouter from './results.route.js';
+import { addResult } from './results.model.js';
 
-// function logResult(student_id, class_name, results) {
-//     const sessionId = nanoid();
-//     results.forEach(({ problem_set, question, testcase, result }) => {
-//         logger.log({
-//             level: 'info',
-//             type: 'result',
-//             session_id: sessionId,
-//             student_id,
-//             className: class_name,
-//             problem_set,
-//             question,
-//             testcase,
-//             result,
-//         });
-//     });
-// }
+const app = express();
+app.use(cors());
 
-// app.get('/', (req, res) => {
-//     res.send('Hello World!');
-// });
+// Middleware to parse JSON requests
+app.use(express.json());
 
-// // Endpoint to receive programming assignment results
-// app.post('/results', async (req, res, next) => {
-//     // Validate the payload
-//     const valid = validate(req.body);
-//     if (!valid) {
-//         return next(createHttpError(400, validate.errorsText()));
-//     }
+function logResult(student_id, class_name, results) {
+    const sessionId = nanoid();
+    const resultsWithStudentIdAndClassName = results.map((result) => ({
+        ...result,
+        student_id,
+        class_name,
+    }));
+    // Send the results to database
+    addResult(resultsWithStudentIdAndClassName);
 
-//     const { student_id, class: className, results } = req.body;
+    results.forEach(({ problem_set, question, testcase, result }) => {
+        logger.log({
+            level: 'info',
+            type: 'result',
+            session_id: sessionId,
+            student_id,
+            className: class_name,
+            problem_set,
+            question,
+            testcase,
+            result,
+        });
+    });
+}
 
-//     // Log results to Loki
-//     logResult(student_id, className, results);
+app.get('/', (req, res) => {
+    res.send('Hello World!');
+});
 
-//     res.sendStatus(200);
-// });
+// Endpoint to receive programming assignment results
+app.post('/results', async (req, res, next) => {
+    // Validate the payload
+    const valid = validate(req.body);
+    if (!valid) {
+        return next(createHttpError(400, validate.errorsText()));
+    }
 
-// app.use((error, req, res, next) => {
-//     console.log(error);
-//     logger.error(error.message || 'Internal Server Error');
-//     res.status(error.status || 500).json({ error: error.message || 'Internal Server Error' });
-// });
+    const { student_id, class: className, results } = req.body;
 
-// export default app;
+    console.log(`Detected Student Id: `, student_id, `Classname:`, className);
+
+    // Log results to Loki
+    // logResult(student_id, className, results);
+
+    res.sendStatus(200);
+});
+
+app.use('/results', attemptRouter);
+
+app.use((error, req, res, next) => {
+    console.log(error);
+    logger.error(error.message || 'Internal Server Error');
+    res.status(error.status || 500).json({ error: error.message || 'Internal Server Error' });
+});
+
+export default app;
+
