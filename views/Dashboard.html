@@ -55,6 +55,16 @@
       justify-content: center;
       border-radius: 4px;
     }
+
+    .card-box {
+      min-width: 200px;
+      max-width: 250px;
+      word-wrap: break-word;
+      text-align: center;
+      padding: 1rem;
+      border-radius: 1rem;
+      overflow-wrap: break-word;
+    }
   </style>
 </head>
 
@@ -161,38 +171,38 @@
 
         <div class="col-md-9 p-3">
           <div class="container-fluid">
-            <div class="row mb-3 justify-content-center gap-3">
+            <div class="row mb-3 justify-content-center gap-3 flex-wrap">
 
               <!-- Card 1 -->
-              <div class="col-md-2 p-3 bg-white border rounded-4 shadow-sm text-center bg-danger-subtle">
+              <div class="col-md-2 p-3 card-box bg-white border rounded-4 shadow-sm text-center bg-danger-subtle">
                 <p class="mb-1 text-muted">Monthly Score</p>
                 <br>
                 <h3 class="mb-1">745</h3>
               </div>
 
               <!-- Card 2 -->
-              <div class="col-md-2 p-3 bg-white border rounded-4 shadow-sm text-center bg-danger-subtle">
+              <div class="col-md-2 p-3 card-box bg-white border rounded-4 shadow-sm text-center bg-danger-subtle">
                 <p class="mb-1 text-muted">Lifetime Score</p>
                 <br>
                 <h3 class="mb-1">3120</h3>
               </div>
 
               <!-- Card 3 -->
-              <div class="col-md-2 p-3 bg-white border rounded-4 shadow-sm text-center bg-danger-subtle">
+              <div class="col-md-2 p-3 card-box bg-white border rounded-4 shadow-sm text-center bg-danger-subtle">
                 <p class="mb-1 text-muted">Challenges Solved</p>
                 <br>
                 <h3 class="mb-1">58</h3>
               </div>
 
               <!-- Card 4 -->
-              <div class="col-md-2 p-3 bg-white border rounded-4 shadow-sm text-center bg-danger-subtle">
+              <div class="col-md-2 p-3 card-box bg-white border rounded-4 shadow-sm text-center bg-danger-subtle">
                 <p class="mb-1 text-muted">Rank</p>
                 <br>
                 <h3 class="mb-1">#12</h3>
               </div>
 
               <!-- Card 5 -->
-              <div class="col-md-2 p-3 bg-white border rounded-4 shadow-sm text-center bg-danger-subtle">
+              <div class="col-md-2 p-3 card-box bg-white border rounded-4 shadow-sm text-center bg-danger-subtle">
                 <p class="mb-1 text-muted">Percentile</p>
                 <br>
                 <h3 class="mb-1">92%</h3>
@@ -248,9 +258,10 @@
 
 
         <div class="container-fluid">
-          <div class="row mb-3 justify-content-center bg-warning-subtle rounded bg-white border rounded-4 shadow-sm p-3">
+          <div
+            class="row mb-3 justify-content-center bg-warning-subtle rounded bg-white border rounded-4 shadow-sm p-5">
             <h3>Badges</h3>
-            <ul class="d-flex list-unstyled gap-3">
+            <ul class="d-flex flex-wrap list-unstyled gap-3">
               <li class="text-center px-4 py-2">
                 Persistent Solver<br>
                 <img class="badge-placeholder" src="/pics/train.jpeg" alt="Train Image">
