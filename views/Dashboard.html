@@ -21,8 +21,8 @@
     }
 
     .badge-placeholder {
-      width: 40px;
-      height: 40px;
+      width: 80px;
+      height: 80px;
       background-color: #dee2e6;
       border-radius: 50%;
       display: inline-block;
@@ -30,8 +30,8 @@
     }
 
     .profile-pic {
-      width: 100px;
-      height: 100px;
+      width: 150px;
+      height: 150px;
       object-fit: cover;
       background-color: #cfd8dc;
       border-radius: 50%;
@@ -92,7 +92,11 @@
           ☰
         </button>
 
-        <div class="profile-pic mb-3"></div>
+        <div class="mb-3 text-center">
+          <img class="profile-pic" src="/pics/cat.webp" alt="Cat Image">
+        </div>
+
+
         <h5>Name: John Doe</h5>
         <h5>Class: DIT/FT/1B/25</h5>
 
@@ -101,7 +105,7 @@
           <p class="mb-1">7 days</p>
           <p>Longest Streak: 12 days</p>
 
-          <div class="text-white p-3 rounded bg-warning">
+          <div class="text-black p-3 rounded bg-danger-subtle">
             <h6 class="mb-3">Weekly Goal</h6>
             <div class="d-flex flex-wrap justify-content-start gap-2 overflow-auto">
               <div class="day-box">Mon</div>
@@ -244,24 +248,24 @@
 
 
         <div class="container-fluid">
-          <div class="row mb-3 justify-content-center bg-warning-subtle rounded bg-white border rounded-4 shadow-sm">
+          <div class="row mb-3 justify-content-center bg-warning-subtle rounded bg-white border rounded-4 shadow-sm p-3">
             <h3>Badges</h3>
             <ul class="d-flex list-unstyled gap-3">
               <li class="text-center px-4 py-2">
                 Persistent Solver<br>
-                <span class="badge-placeholder"></span>
+                <img class="badge-placeholder" src="/pics/train.jpeg" alt="Train Image">
               </li>
               <li class="text-center px-4 py-2">
                 Never Give Up<br>
-                <span class="badge-placeholder"></span>
+                <img class="badge-placeholder" src="/pics/mountain.jpeg" alt="Mountain Image">
               </li>
               <li class="text-center px-4 py-2">
                 Daily Streaker<br>
-                <span class="badge-placeholder"></span>
+                <img class="badge-placeholder" src="/pics/sunset.jpeg" alt="Sun Image">
               </li>
               <li class="text-center px-4 py-2">
                 Foundation builder<br>
-                <span class="badge-placeholder"></span>
+                <img class="badge-placeholder" src="/pics/tent.jpeg" alt="Tent Image">
               </li>
             </ul>
           </div>
