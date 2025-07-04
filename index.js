@@ -5,6 +5,9 @@ import createHttpError from 'http-errors';
 import cors from 'cors';
 import { nanoid } from 'nanoid';
 
+import attemptRouter from './results.route.js';
+import { addResult } from './results.model.js';
+
 const app = express();
 app.use(cors());
 
@@ -13,6 +16,14 @@ app.use(express.json());
 
 function logResult(student_id, class_name, results) {
     const sessionId = nanoid();
+    const resultsWithStudentIdAndClassName = results.map((result) => ({
+        ...result,
+        student_id,
+        class_name,
+    }));
+    // Send the results to database
+    addResult(resultsWithStudentIdAndClassName);
+
     results.forEach(({ problem_set, question, testcase, result }) => {
         logger.log({
             level: 'info',
@@ -42,11 +53,15 @@ app.post('/results', async (req, res, next) => {
 
     const { student_id, class: className, results } = req.body;
 
+    console.log(`Detected Student Id: `, student_id, `Classname:`, className);
+
     // Log results to Loki
-    logResult(student_id, className, results);
+    // logResult(student_id, className, results);
 
     res.sendStatus(200);
 });
+
+app.use('/results', attemptRouter);
 
 app.use((error, req, res, next) => {
     console.log(error);
