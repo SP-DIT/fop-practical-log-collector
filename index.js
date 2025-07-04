@@ -1,3 +1,4 @@
+
 import express from 'express';
 import validate from './schema.js';
 import logger from './logger.js';
@@ -70,3 +71,4 @@ app.use((error, req, res, next) => {
 });
 
 export default app;
+
