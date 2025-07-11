@@ -38,27 +38,25 @@
       margin: auto;
     }
 
-    .profile-pic-settings {
+   .profile-pic-settings {
       width: 250px;
       height: 250px;
       background-color: #cfd8dc;
       border-radius: 50%;
-      margin: auto;
+      margin: 0;
     }
 
     .edit-icon {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      transform: translate(25%, 25%);
       background-color: white;
       color: #0d6efd;
-      border-radius: 50%;
-      padding: 6px;
-      font-size: 20px;
+      border-radius: 25%;
+      padding: 5px;
+      font-size: 24px;
       box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
       cursor: pointer;
     }
+
+
 
     .difficulty-bar {
       height: 16px;
@@ -78,6 +76,49 @@
       justify-content: center;
       border-radius: 4px;
     }
+
+    /* for dark mode */
+    .dark-mode {
+      background-color: #121212 !important;
+      color: #ffffff !important;
+    }
+
+    .dark-mode .dashboard-card,
+    .dark-mode .offcanvas,
+    .dark-mode .form-control,
+    .dark-mode .form-select,
+    .dark-mode .bg-light,
+    .dark-mode .bg-white {
+      background-color: #1e1e1e !important;
+      color: #ffffff !important;
+      border-color: #333 !important;
+    }
+
+    .dark-mode .form-control::placeholder,
+    .dark-mode .form-select option {
+      color: #aaa;
+    }
+
+    .dark-mode .nav-link,
+    .dark-mode .text-black {
+      color: #ffffff !important;
+    }
+
+    body,
+    .dashboard-card,
+    .bg-light,
+    .bg-white,
+    .form-control,
+    .form-select {
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .dark-mode .custom-sidebar {
+    background-color: #1e1e1e !important; /* or #212529 or any dark shade */
+    color: #fff !important;
+    }
+
+
   </style>
 </head>
 
@@ -109,7 +150,7 @@
   <div class="container-fluid">
     <div class="row min-vh-100">
       <!-- Sidebar -->
-      <div class="col-md-3 bg-warning-subtle p-3 boarder-0">
+      <div class="col-md-3 custom-sidebar p-3 boarder-0 bg-warning-subtle">
         <button class="btn btn-primary mb-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu"
           aria-controls="sidebarMenu">
           ☰
@@ -183,8 +224,8 @@
             </div>
 
             <!-- Profile pic change -->
-            <div class="position-relative d-inline-block mb-3">
-              <div class="profile-pic-settings"></div>
+            <div class="d-flex justify-content-center align-items-center mb-3 gap-3">
+              <div class="profile-pic-settings m-0"></div>
               <i class="bi bi-pencil-fill edit-icon"></i>
             </div>
 
