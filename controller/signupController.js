@@ -7,17 +7,17 @@ export const handleSignup = async (req, res) => {
         return res.status(400).send('Please fill all fields.');
     }
 
-    const client = await pool.connect();
+    // const client = await pool.connect();
     try {
         // 1. Check if class exists
-        const classResult = await client.query('SELECT id FROM class WHERE class = $1', [className]);
+        const classResult = await pool.query('SELECT id FROM class WHERE class = $1', [className]);
 
         let classId;
         if (classResult.rows.length > 0) {
             classId = classResult.rows[0].id;
         } else {
             // 2. Insert class if it doesn't exist
-            const insertClass = await client.query(
+            const insertClass = await pool.query(
                 'INSERT INTO class(class) VALUES($1) RETURNING id',
                 [className]
             );
@@ -25,7 +25,7 @@ export const handleSignup = async (req, res) => {
         }
 
         // 3. Insert user with class_id
-        const userResult = await client.query(
+        const userResult = await pool.query(
             'INSERT INTO users (name, ichat, class_id) VALUES ($1, $2, $3) RETURNING id, name, ichat',
             [name, ichat, classId]
         );

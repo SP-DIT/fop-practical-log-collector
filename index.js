@@ -1,3 +1,4 @@
+
 import express from 'express';
 import validate from './schema.js';
 import logger from './logger.js';
@@ -59,7 +60,7 @@ function logResult(student_id, class_name, results) {
     // logResult(student_id, className, results);
 
     res.sendStatus(200);
-});
+;
 
 app.use('/results', attemptRouter);
 
@@ -69,4 +70,5 @@ app.use('/results', attemptRouter);
 //     res.status(error.status || 500).json({ error: error.message || 'Internal Server Error' });
 // });
 
-// export default app;
+export default app;
+
