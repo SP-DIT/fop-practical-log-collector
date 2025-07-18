@@ -10,6 +10,7 @@ import signupRoutes from './signupRoutes.js';
 import loginRoutes from './loginRoutes.js';
 import verifyRoutes from './verifyRoutes.js';
 import { requireAuth } from '../middleware/auth.js';
+import logoutRoutes from './logoutRoutes.js';
 
 
 const router = express.Router();
@@ -18,6 +19,7 @@ const router = express.Router();
 router.get('/dashboard', requireAuth, (req, res) => {
   res.sendFile('dashboard.html', { root: './views' });
 });
+
 router.use('/users', usersRoutes);
 router.use('/points', pointsRoutes);
 router.use('/class', classRoutes);
@@ -28,6 +30,6 @@ router.use('/fastest', fastestRoutes);
 router.use('/', signupRoutes);
 router.use('/', loginRoutes);
 router.use('/', verifyRoutes);
-
+router.use('/', logoutRoutes);
 
 export default router;
