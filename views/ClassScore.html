@@ -48,6 +48,60 @@
     .difficulty-bar {
       height: 16px;
     }
+
+    /* Style sheet for the ranking podium */
+    body {
+      background-color: #ffffff;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .podium {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 20px;
+      padding: 60px 20px;
+    }
+
+    .podium-card {
+      background-color: #ffd52b;
+      border-radius: 20px;
+      width: 180px;
+      text-align: center;
+      padding: 20px 10px;
+      position: relative;
+    }
+
+    .first {
+      height: 350px;
+    }
+
+    .second {
+      height: 300px;
+      border: 2px;
+    }
+
+    .third {
+      height: 250px;
+    }
+
+    .badge-img {
+      width: 80px;
+      height: auto;
+      margin: 10px auto;
+    }
+
+    .team-name {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .score {
+      font-size: 1.4rem;
+      font-weight: bold;
+      margin-top: 20px;
+    }
   </style>
 </head>
 
@@ -152,6 +206,35 @@
               </li>
             </ul>
           </div>
+
+          <!-- Class ranking podium illustration -->
+          <div class="container text-center mt-5">
+            <h1 class="mb-4">🏆 Class Score</h1>
+          </div>
+
+          <div class="container podium">
+            <!-- Second Place -->
+            <div class="podium-card second">
+              <div class="team-name">DIT/FT/1A/03</div>
+              <img src="/pics/silver.png" alt="2nd Place" class="badge-img">
+              <div class="score">100</div>
+            </div>
+
+            <!-- First Place -->
+            <div class="podium-card first">
+              <div class="team-name">DAAA/FT/1A/03</div>
+              <img src="/pics/gold.png" alt="1st Place" class="badge-img">
+              <div class="score">20</div>
+            </div>
+
+            <!-- Third Place -->
+            <div class="podium-card third">
+              <div class="team-name">DIT/FT/1A/02</div>
+              <img src="/pics/bronze.png" alt="3rd Place" class="badge-img">
+              <div class="score">20</div>
+            </div>
+          </div>
+
 
           <!-- Table Row -->
           <div class="row justify-content-center">
