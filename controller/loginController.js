@@ -1,4 +1,5 @@
 import pool from '../db.js';
+import { sendOTPEmail } from '../services/mailService.js'; // <-- use the nodemailer function
 
 export const handleLogin = async (req, res) => {
   const { name, ichat } = req.body;
@@ -20,19 +21,28 @@ export const handleLogin = async (req, res) => {
       return res.status(401).send('Invalid credentials. Please try again.');
     }
 
-    // Set user session upon successful login
-    req.session.user = {
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    const expiry = Date.now() + 5 * 60 * 1000;
+
+    req.session.tempLogin = {
       id: result.rows[0].id,
       name: result.rows[0].name,
-      ichat: result.rows[0].ichat
+      ichat: result.rows[0].ichat,
+      otp,
+      expiry
     };
 
-    // Successful login, redirect to dashboard
-    res.redirect('/dashboard');
+    // Send OTP (assuming sendOTPEmail is set up)
+    await sendOTPEmail(ichat, otp);
+
+    // Redirect to OTP page
+    return res.redirect('/verify-otp');
+
   } catch (error) {
     console.error('Login error:', error);
-    res.status(500).send('Internal Server Error');
+    return res.status(500).send('Internal Server Error');
   } finally {
     client.release();
   }
 };
+
