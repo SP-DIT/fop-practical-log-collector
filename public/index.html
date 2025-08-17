@@ -4,6 +4,7 @@
         <meta charset="UTF-8" />
         <title>Attendance Table</title>
         <link rel="stylesheet" href="styles.css" />
+        <link rel="stylesheet" href="done-students.css" />
     </head>
     <body>
         <h2 class="page-title">Attendance Log</h2>
@@ -20,10 +21,30 @@
                     <th>Class</th>
                     <th>Exam Venue</th>
                     <th>Checked</th>
+                    <th>Done?</th>
                 </tr>
             </thead>
             <tbody id="attendance-body">
                 <!-- Rows will be inserted here -->
+            </tbody>
+        </table>
+
+        <h2 class="page-title">Done Students</h2>
+        <div class="status-container">
+            <span id="done-refresh-status" class="refresh-status"></span>
+            <span id="done-countdown" class="countdown"></span>
+        </div>
+        <table id="done-students-table">
+            <thead>
+                <tr>
+                    <th>Student ID</th>
+                    <th>Name</th>
+                    <th>Done Time</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="done-students-body">
+                <!-- Done students will be inserted here -->
             </tbody>
         </table>
 
@@ -35,9 +56,20 @@
                 <td class="class"></td>
                 <td class="exam-venue"></td>
                 <td class="checked-cell"></td>
+                <td class="mark-as-done"><button class="done">✅</button></td>
+            </tr>
+        </template>
+
+        <template id="done-student-row-template">
+            <tr>
+                <td class="student-id"></td>
+                <td class="name"></td>
+                <td class="done-time"></td>
+                <td class="action-cell"></td>
             </tr>
         </template>
 
         <script src="script.js"></script>
+        <script src="done-students.js"></script>
     </body>
 </html>

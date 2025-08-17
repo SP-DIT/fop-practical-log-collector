@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { checkRecord, getRecords } from '../models/attemptLogs.model.js';
+import { checkRecord, getRecords, markAsDone, markAsUndone, getDoneRecords } from '../models/attemptLogs.model.js';
 
 const router = Router();
 
@@ -17,6 +17,32 @@ router.put('/:recordId/check', (req, res) => {
             return res.status(200).json(record);
         }
         return res.status(404).json({ message: 'Record not found' });
+    });
+});
+
+router.post('/students/:studentId/done', (req, res) => {
+    const { studentId } = req.params;
+    markAsDone(studentId).then((record) => {
+        if (record) {
+            return res.status(200).json(record);
+        }
+        return res.status(404).json({ message: 'Record not found' });
+    });
+});
+
+router.delete('/students/:studentId/undone', (req, res) => {
+    const { studentId } = req.params;
+    markAsUndone(studentId).then((success) => {
+        if (success) {
+            return res.status(200).json({ message: 'Record marked as undone' });
+        }
+        return res.status(404).json({ message: 'Record not found' });
+    });
+});
+
+router.get('/students/done', (req, res) => {
+    getDoneRecords().then((records) => {
+        return res.json(records);
     });
 });
 

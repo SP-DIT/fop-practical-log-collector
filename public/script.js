@@ -67,6 +67,13 @@ async function fetchAttempts(isAutoRefresh = false) {
                 });
                 checkedCell.appendChild(btn);
             }
+
+            const markAsDoneCell = clone.querySelector('.mark-as-done');
+            const doneBtn = markAsDoneCell.querySelector('.done');
+            doneBtn.addEventListener('click', () => {
+                markAsDone(item.student_id);
+            });
+
             tbody.appendChild(clone);
         });
 
@@ -84,6 +91,20 @@ async function fetchAttempts(isAutoRefresh = false) {
         tbody.innerHTML = `<tr><td colspan="6">Failed to load data</td></tr>`;
         refreshStatus.textContent = 'Error loading data';
         refreshStatus.className = 'refresh-status error';
+    }
+}
+
+async function markAsDone(studentId) {
+    try {
+        const response = await fetch(`/attempts/students/${studentId}/done`, {
+            method: 'POST',
+        });
+        if (response.ok) {
+            alert(`${studentData[studentId.toUpperCase()]} (${studentId}) marked as done`);
+            await fetchAttempts();
+        }
+    } catch (err) {
+        console.error(err);
     }
 }
 

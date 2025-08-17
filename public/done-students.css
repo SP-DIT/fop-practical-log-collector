@@ -1,0 +1,58 @@
+#done-students-table {
+    border-collapse: collapse;
+    width: 80%;
+    margin: 2rem auto;
+    margin-top: 3rem;
+}
+
+#done-students-table th,
+#done-students-table td {
+    border: 1px solid #ccc;
+    padding: 0.75rem;
+    text-align: center;
+}
+
+#done-students-table th {
+    background-color: #f8f9fa;
+}
+
+.undone-btn {
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.undone-btn:hover {
+    background-color: #c82333;
+}
+
+.undone-btn:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+/* New done student indicator */
+.new-done-row {
+    background-color: #fff3cd;
+    border-left: 4px solid #ffc107;
+    animation: fadeDoneToNormal 3s ease-in-out forwards;
+}
+
+.new-done-row td {
+    background-color: inherit;
+}
+
+@keyframes fadeDoneToNormal {
+    0% {
+        background-color: #fff3cd;
+        border-left: 4px solid #ffc107;
+    }
+    100% {
+        background-color: transparent;
+        border-left: 1px solid #ccc;
+    }
+}
