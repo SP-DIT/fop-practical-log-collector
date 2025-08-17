@@ -17,6 +17,12 @@ router.get('/', (req, res) => {
     });
 });
 
+router.get('/students/done', (req, res) => {
+    getDoneRecords().then((records) => {
+        return res.json(records);
+    });
+});
+
 router.get('/students/:studentId', (req, res) => {
     const { studentId } = req.params;
     getStudentRecord(studentId).then((record) => {
@@ -54,12 +60,6 @@ router.delete('/students/:studentId/undone', (req, res) => {
             return res.status(200).json({ message: 'Record marked as undone' });
         }
         return res.status(404).json({ message: 'Record not found' });
-    });
-});
-
-router.get('/students/done', (req, res) => {
-    getDoneRecords().then((records) => {
-        return res.json(records);
     });
 });
 
