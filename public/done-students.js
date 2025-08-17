@@ -4,10 +4,108 @@ const doneStudentTemplate = document.getElementById('done-student-row-template')
 const doneRefreshStatus = document.getElementById('done-refresh-status');
 const doneCountdown = document.getElementById('done-countdown');
 
+// Manual form elements
+const manualDoneForm = document.getElementById('manual-done-form');
+const studentIdInput = document.getElementById('student-id-input');
+const markDoneBtn = document.getElementById('mark-done-btn');
+const formMessage = document.getElementById('form-message');
+
 let doneRefreshTimer;
 let doneCountdownTimer;
 let doneCountdownSeconds = 10;
 let previousDoneData = []; // Track previous data to identify new done students
+let formMessageTimer; // Timer for auto-clearing form messages
+
+// Initialize manual form
+function initializeManualForm() {
+    manualDoneForm.addEventListener('submit', handleManualMarkAsDone);
+
+    // Clear form message when typing
+    studentIdInput.addEventListener('input', () => {
+        clearFormMessage();
+    });
+}
+
+// Handle manual mark as done form submission
+async function handleManualMarkAsDone(event) {
+    event.preventDefault();
+
+    const studentId = studentIdInput.value.trim().toUpperCase();
+
+    if (!studentId) {
+        showFormMessage('Please enter a student ID', 'error');
+        return;
+    }
+
+    // Disable form while processing
+    markDoneBtn.disabled = true;
+    markDoneBtn.textContent = 'Processing...';
+    showFormMessage('Marking student as done...', 'info', false); // Don't auto-clear processing messages
+
+    try {
+        const response = await fetch(`/attempts/students/${studentId}/done`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (response.ok) {
+            const studentName = studentData[studentId] || 'Unknown';
+            showFormMessage(`✅ ${studentName} (${studentId}) marked as done successfully!`, 'success');
+            studentIdInput.value = '';
+
+            // Refresh both tables to show updated data
+            await fetchDoneStudents();
+            // Also trigger refresh of main attendance table if available
+            if (typeof fetchAttempts === 'function') {
+                await fetchAttempts();
+            }
+        } else {
+            const errorData = await response.json().catch(() => ({}));
+            const errorMessage = errorData.message || `Failed to mark student as done (Status: ${response.status})`;
+            showFormMessage(`❌ ${errorMessage}`, 'error');
+        }
+    } catch (error) {
+        console.error('Error marking student as done:', error);
+        showFormMessage('❌ Network error. Please try again.', 'error');
+    } finally {
+        // Re-enable form
+        markDoneBtn.disabled = false;
+        markDoneBtn.textContent = 'Mark as Done';
+    }
+}
+
+// Show form message with different types
+function showFormMessage(message, type = 'info', autoClear = true) {
+    // Clear any existing timer
+    if (formMessageTimer) {
+        clearTimeout(formMessageTimer);
+    }
+
+    formMessage.textContent = message;
+    formMessage.className = `form-message ${type}`;
+    formMessage.style.display = 'block';
+
+    // Auto-clear message after specified time (except for processing messages)
+    if (autoClear && type !== 'info') {
+        const clearTime = type === 'success' ? 5000 : 7000; // Success: 5s, Error: 7s
+        formMessageTimer = setTimeout(() => {
+            clearFormMessage();
+        }, clearTime);
+    }
+}
+
+// Clear form message
+function clearFormMessage() {
+    if (formMessageTimer) {
+        clearTimeout(formMessageTimer);
+        formMessageTimer = null;
+    }
+    formMessage.textContent = '';
+    formMessage.className = 'form-message';
+    formMessage.style.display = 'none';
+}
 
 async function fetchDoneStudents(isAutoRefresh = false) {
     try {
@@ -143,6 +241,9 @@ function startDoneAutoRefresh() {
 // Wait for studentData to be loaded before initializing done students table
 function initializeDoneStudents() {
     if (typeof studentData !== 'undefined' && Object.keys(studentData).length > 0) {
+        // Initialize the manual form
+        initializeManualForm();
+
         fetchDoneStudents().then(() => {
             startDoneAutoRefresh();
         });

@@ -30,6 +30,20 @@
         </table>
 
         <h2 class="page-title">Done Students</h2>
+
+        <!-- Manual Mark as Done Form -->
+        <div class="manual-done-form">
+            <h3>Mark Student as Done Manually</h3>
+            <form id="manual-done-form">
+                <div class="form-group">
+                    <label for="student-id-input">Student ID:</label>
+                    <input type="text" id="student-id-input" placeholder="Enter student ID" required />
+                    <button type="submit" id="mark-done-btn">Mark as Done</button>
+                </div>
+                <div id="form-message" class="form-message"></div>
+            </form>
+        </div>
+
         <div class="status-container">
             <span id="done-refresh-status" class="refresh-status"></span>
             <span id="done-countdown" class="countdown"></span>
