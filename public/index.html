@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Attendance Table</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <h2 class="page-title">Attendance Log</h2>
+        <div class="status-container">
+            <span id="refresh-status" class="refresh-status"></span>
+            <span id="countdown" class="countdown"></span>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>Student ID</th>
+                    <th>Name</th>
+                    <th>Class</th>
+                    <th>Exam Venue</th>
+                    <th>Checked</th>
+                </tr>
+            </thead>
+            <tbody id="attendance-body">
+                <!-- Rows will be inserted here -->
+            </tbody>
+        </table>
+
+        <template id="attendance-row-template">
+            <tr>
+                <td class="time"></td>
+                <td class="student-id"></td>
+                <td class="name"></td>
+                <td class="class"></td>
+                <td class="exam-venue"></td>
+                <td class="checked-cell"></td>
+            </tr>
+        </template>
+
+        <script src="script.js"></script>
+    </body>
+</html>

@@ -1,18 +1,22 @@
 import express from 'express';
-import validate from './schema.js';
-import logger from './logger.js';
+import validate from './utils/schema.js';
+import logger from './utils/logger.js';
 import createHttpError from 'http-errors';
 import cors from 'cors';
 import { nanoid } from 'nanoid';
 
-import attemptRouter from './results.route.js';
-import { addResult } from './results.model.js';
+import resultRouter from './routers/results.route.js';
+import { addResult } from './models/results.model.js';
+import attemptsRouter from './routers/attemptLogs.route.js';
+import { addRecord } from './models/attemptLogs.model.js';
 
 const app = express();
 app.use(cors());
 
 // Middleware to parse JSON requests
 app.use(express.json());
+
+app.use(express.static('public'));
 
 function logResult(student_id, class_name, results) {
     const sessionId = nanoid();
@@ -21,22 +25,25 @@ function logResult(student_id, class_name, results) {
         student_id,
         class_name,
     }));
+
     // Send the results to database
     addResult(resultsWithStudentIdAndClassName);
+    addRecord(student_id, class_name);
 
-    results.forEach(({ problem_set, question, testcase, result }) => {
-        logger.log({
-            level: 'info',
-            type: 'result',
-            session_id: sessionId,
-            student_id,
-            className: class_name,
-            problem_set,
-            question,
-            testcase,
-            result,
-        });
-    });
+    // Send results to loki
+    // results.forEach(({ problem_set, question, testcase, result }) => {
+    //     logger.log({
+    //         level: 'info',
+    //         type: 'result',
+    //         session_id: sessionId,
+    //         student_id,
+    //         className: class_name,
+    //         problem_set,
+    //         question,
+    //         testcase,
+    //         result,
+    //     });
+    // });
 }
 
 app.get('/', (req, res) => {
@@ -53,15 +60,13 @@ app.post('/results', async (req, res, next) => {
 
     const { student_id, class: className, results } = req.body;
 
-    console.log(`Detected Student Id: `, student_id, `Classname:`, className);
-
-    // Log results to Loki
-    // logResult(student_id, className, results);
+    logResult(student_id, className, results);
 
     res.sendStatus(200);
 });
 
-app.use('/results', attemptRouter);
+app.use('/results', resultRouter);
+app.use('/attempts', attemptsRouter);
 
 app.use((error, req, res, next) => {
     console.log(error);

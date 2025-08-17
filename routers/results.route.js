@@ -4,7 +4,7 @@ import {
     getResultsByProblemSet,
     getResultsByQuestion,
     getResultsByStudentId,
-} from './results.model.js';
+} from '../models/results.model.js';
 
 const router = Router();
 

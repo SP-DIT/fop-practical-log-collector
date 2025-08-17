@@ -2,8 +2,8 @@ POST http://localhost:3000/results
 Content-Type: application/json
 
 {
-    "student_id": "12345",
-    "class": "123",
+    "student_id": "p1121782",
+    "class": "DIT/FT/1A/01",
     "results": [
         {"problem_set": "1Test", "question": 1, "testcase": 1, "result": 1},
         {"problem_set": "1Test", "question": 1, "testcase": 2, "result": 1},
@@ -99,3 +99,12 @@ GET http://localhost:3000/results/problem-sets/1Test
 ###
 
 GET http://localhost:3000/results/problem-sets/1Test/questions/1
+
+###
+
+GET http://localhost:3000/attempts/
+
+###
+
+PUT http://localhost:3000/attempts/5/check
+

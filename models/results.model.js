@@ -1,4 +1,4 @@
-import pool from './database.js';
+import pool from '../utils/database.js';
 
 export async function addResult(results) {
     const query = `
@@ -18,7 +18,6 @@ export async function addResult(results) {
         r.result,
     ]);
     const result = await pool.query(query, values);
-    console.log(result);
     return result.rowCount;
 }
 
