@@ -79,6 +79,19 @@ button {
     border-color: #218838;
 }
 
+/* Student name links */
+.student-link {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.student-link:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
 /* New row indicator styles */
 .new-row {
     background-color: #d4edda !important;

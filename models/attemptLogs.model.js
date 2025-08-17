@@ -27,6 +27,11 @@ export function getRecords() {
     return pool.query(query).then((result) => result.rows);
 }
 
+export function getStudentRecord(studentId) {
+    const query = 'SELECT * FROM attempt_logs WHERE student_id = $1 ORDER BY id DESC';
+    return pool.query(query, [studentId]).then((result) => result.rows);
+}
+
 export function getDoneRecords(page = 1) {
     const offset = (page - 1) * 50;
     const query = `SELECT * FROM est_done ORDER BY student_id DESC LIMIT 50 OFFSET $1`;

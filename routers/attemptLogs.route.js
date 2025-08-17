@@ -1,5 +1,12 @@
 import { Router } from 'express';
-import { checkRecord, getRecords, markAsDone, markAsUndone, getDoneRecords } from '../models/attemptLogs.model.js';
+import {
+    checkRecord,
+    getRecords,
+    markAsDone,
+    markAsUndone,
+    getDoneRecords,
+    getStudentRecord,
+} from '../models/attemptLogs.model.js';
 
 const router = Router();
 
@@ -7,6 +14,16 @@ router.get('/', (req, res) => {
     // Get all records
     getRecords().then((records) => {
         return res.json(records);
+    });
+});
+
+router.get('/students/:studentId', (req, res) => {
+    const { studentId } = req.params;
+    getStudentRecord(studentId).then((record) => {
+        if (record) {
+            return res.json(record);
+        }
+        return res.status(404).json({ message: 'Record not found' });
     });
 });
 
