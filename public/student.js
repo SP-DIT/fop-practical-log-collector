@@ -33,10 +33,7 @@ async function initializeStudentPage() {
 
     try {
         // Load student and exam venue data
-        const res = await Promise.all([
-            fetch('./students.json'),
-            fetch('./examVenue.json')
-        ]);
+        const res = await Promise.all([fetch('./students.json'), fetch('./examVenue.json')]);
         studentData = await res[0].json();
         examVenueData = await res[1].json();
 
@@ -48,7 +45,6 @@ async function initializeStudentPage() {
 
         // Start auto refresh
         startStudentAutoRefresh();
-
     } catch (error) {
         console.error('Error initializing student page:', error);
         showError('Failed to load student data');
@@ -87,7 +83,6 @@ async function fetchStudentData(isAutoRefresh = false) {
         const now = new Date().toLocaleTimeString();
         studentRefreshStatus.textContent = `Last updated: ${now}`;
         studentRefreshStatus.className = 'refresh-status success';
-
     } catch (error) {
         console.error('Error fetching student data:', error);
         showError('Failed to load student data');
@@ -100,12 +95,12 @@ async function fetchStudentData(isAutoRefresh = false) {
 function updateStudentInfo(studentAttempts) {
     const studentName = studentData[currentStudentId.toUpperCase()] || 'Unknown Student';
     studentTitle.textContent = `${studentName} (${currentStudentId})`;
-    
+
     // Update browser tab title
     document.title = `${studentName} (${currentStudentId}) - Student Details`;
 
     const totalAttempts = studentAttempts.length;
-    const checkedAttempts = studentAttempts.filter(attempt => attempt.checked).length;
+    const checkedAttempts = studentAttempts.filter((attempt) => attempt.checked).length;
 
     studentInfo.innerHTML = `
         <div class="student-info">
@@ -134,8 +129,8 @@ function updateAttemptsTable(attempts, isAutoRefresh = false) {
     // Identify new attempts
     const newAttemptIds = new Set();
     if (isAutoRefresh && previousStudentAttempts.length > 0) {
-        const previousIds = new Set(previousStudentAttempts.map(attempt => attempt.id));
-        attempts.forEach(attempt => {
+        const previousIds = new Set(previousStudentAttempts.map((attempt) => attempt.id));
+        attempts.forEach((attempt) => {
             if (!previousIds.has(attempt.id)) {
                 newAttemptIds.add(attempt.id);
             }
@@ -160,7 +155,7 @@ function updateAttemptsTable(attempts, isAutoRefresh = false) {
         return;
     }
 
-    attempts.forEach(attempt => {
+    attempts.forEach((attempt) => {
         const clone = studentAttemptTemplate.content.cloneNode(true);
         const row = clone.querySelector('tr');
 
@@ -307,6 +302,6 @@ async function checkStudentAttendance(btn, id) {
 }
 
 // Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     initializeStudentPage();
 });

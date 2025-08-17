@@ -149,13 +149,13 @@ async function fetchDoneStudents(isAutoRefresh = false) {
             }
 
             clone.querySelector('.student-id').textContent = item.student_id;
-            
+
             // Make student name clickable
             const nameCell = clone.querySelector('.name');
             const studentName = studentData[item.student_id.toUpperCase()] || '???';
             nameCell.innerHTML = `<a href="student.html?studentId=${item.student_id}" class="student-link">${studentName}</a>`;
-            
-            clone.querySelector('.done-time').textContent = new Date(item.done_time).toLocaleString();
+
+            clone.querySelector('.done-time').textContent = new Date(item.time).toLocaleString();
 
             const actionCell = clone.querySelector('.action-cell');
             const undoneBtn = document.createElement('button');

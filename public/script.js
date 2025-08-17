@@ -55,14 +55,14 @@ async function fetchAttempts(isAutoRefresh = false) {
 
             clone.querySelector('.time').textContent = new Date(item.time).toLocaleString();
             clone.querySelector('.student-id').textContent = item.student_id;
-            
+
             // Make student name clickable
             const nameCell = clone.querySelector('.name');
             const studentLink = nameCell.querySelector('.student-link');
             const studentName = studentData[item.student_id.toUpperCase()] || 'Unknown';
             studentLink.href = `student.html?studentId=${item.student_id}`;
             studentLink.textContent = studentName;
-            
+
             clone.querySelector('.class').textContent = item.class;
             clone.querySelector('.exam-venue').textContent = examVenueData[item.class.toUpperCase()] || '???';
             const checkedCell = clone.querySelector('.checked-cell');
