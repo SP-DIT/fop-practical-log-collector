@@ -52,6 +52,33 @@ button {
     color: #007bff;
 }
 
+.refresh-control-btn {
+    margin-left: 1rem;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.9rem;
+    border: 1px solid #007bff;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.refresh-control-btn:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.refresh-control-btn.paused {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.refresh-control-btn.paused:hover {
+    background-color: #218838;
+    border-color: #218838;
+}
+
 /* New row indicator styles */
 .new-row {
     background-color: #d4edda !important;

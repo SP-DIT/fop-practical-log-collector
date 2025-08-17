@@ -2,6 +2,7 @@ const tbody = document.getElementById('attendance-body');
 const template = document.getElementById('attendance-row-template');
 const refreshStatus = document.getElementById('refresh-status');
 const countdown = document.getElementById('countdown');
+const pauseRefreshBtn = document.getElementById('pause-refresh-btn');
 
 let refreshTimer;
 let countdownTimer;
@@ -9,6 +10,7 @@ let countdownSeconds = 5;
 let studentData = {};
 let examVenueData = {};
 let previousAttendanceData = []; // Track previous data to identify new rows
+let isRefreshPaused = false; // Track pause state
 
 async function fetchAttempts(isAutoRefresh = false) {
     try {
@@ -118,8 +120,10 @@ async function checkAttendance(btn, id) {
         if (response.ok) {
             const data = await response.json();
             btn.parentElement.textContent = new Date(data.checked).toLocaleString();
-            // Restart the auto-refresh cycle to get updated data
-            startAutoRefresh();
+            // Restart the auto-refresh cycle to get updated data (only if not paused)
+            if (!isRefreshPaused) {
+                startAutoRefresh();
+            }
         } else {
             btn.disabled = false;
             btn.textContent = 'Check';
@@ -130,6 +134,55 @@ async function checkAttendance(btn, id) {
         btn.disabled = false;
         btn.textContent = 'Check';
     }
+}
+
+// Initialize pause/resume functionality
+function initializePauseFeature() {
+    pauseRefreshBtn.addEventListener('click', toggleAutoRefresh);
+}
+
+// Toggle between pause and resume
+function toggleAutoRefresh() {
+    if (isRefreshPaused) {
+        resumeAutoRefresh();
+    } else {
+        pauseAutoRefresh();
+    }
+}
+
+// Pause auto refresh
+function pauseAutoRefresh() {
+    isRefreshPaused = true;
+
+    // Clear existing timers
+    if (refreshTimer) clearTimeout(refreshTimer);
+    if (countdownTimer) clearInterval(countdownTimer);
+
+    // Update UI
+    pauseRefreshBtn.textContent = '▶️ Resume';
+    pauseRefreshBtn.className = 'refresh-control-btn paused';
+    countdown.textContent = 'Auto-refresh paused';
+    countdown.style.color = '#ffc107';
+
+    // Update status
+    if (refreshStatus.className.includes('refreshing')) {
+        refreshStatus.textContent = 'Paused during refresh';
+        refreshStatus.className = 'refresh-status';
+        refreshStatus.style.color = '#ffc107';
+    }
+}
+
+// Resume auto refresh
+function resumeAutoRefresh() {
+    isRefreshPaused = false;
+
+    // Update UI
+    pauseRefreshBtn.textContent = '⏸️ Pause';
+    pauseRefreshBtn.className = 'refresh-control-btn';
+    countdown.style.color = '#007bff';
+
+    // Restart auto refresh
+    startAutoRefresh();
 }
 
 function updateCountdown() {
@@ -148,6 +201,11 @@ function startCountdown() {
 }
 
 function startAutoRefresh() {
+    // Don't start if paused
+    if (isRefreshPaused) {
+        return;
+    }
+
     // Clear existing timers
     if (refreshTimer) clearTimeout(refreshTimer);
     if (countdownTimer) clearInterval(countdownTimer);
@@ -157,9 +215,12 @@ function startAutoRefresh() {
 
     // Set up auto refresh
     refreshTimer = setTimeout(() => {
-        fetchAttempts(true).then(() => {
-            startAutoRefresh(); // Continue the cycle
-        });
+        // Check again if still not paused before refreshing
+        if (!isRefreshPaused) {
+            fetchAttempts(true).then(() => {
+                startAutoRefresh(); // Continue the cycle
+            });
+        }
     }, 5000);
 }
 
@@ -169,11 +230,15 @@ function startAutoRefresh() {
         const res = await Promise.all([fetch('./students.json'), fetch('./examVenue.json')]);
         studentData = await res[0].json();
         examVenueData = await res[1].json();
+
+        // Initialize pause feature
+        initializePauseFeature();
+
         await fetchAttempts();
         startAutoRefresh();
     } catch (err) {
         console.error(err);
-        tbody.innerHTML = `<tr><td colspan="6">Failed to load data</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="7">Failed to load data</td></tr>`;
         refreshStatus.textContent = 'Error loading data';
         refreshStatus.className = 'refresh-status error';
     }
