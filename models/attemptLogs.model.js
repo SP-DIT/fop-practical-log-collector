@@ -16,6 +16,6 @@ export function checkRecord(recordId) {
 }
 
 export function getRecords() {
-    const query = 'SELECT * FROM attempt_logs ORDER BY id DESC';
+    const query = 'SELECT * FROM attempt_logs ORDER BY id DESC LIMIT 50';
     return pool.query(query).then((result) => result.rows);
 }

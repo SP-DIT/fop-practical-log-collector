@@ -141,6 +141,7 @@ function startAutoRefresh() {
         });
     }, 5000);
 }
+
 // Fetch student.json first, then fetch attendance and start auto refresh using async/await
 (async () => {
     try {

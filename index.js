@@ -27,7 +27,7 @@ function logResult(student_id, class_name, results) {
     }));
 
     // Send the results to database
-    addResult(resultsWithStudentIdAndClassName);
+    // addResult(resultsWithStudentIdAndClassName);
     addRecord(student_id, class_name);
 
     // Send results to loki
