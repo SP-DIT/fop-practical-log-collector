@@ -22,7 +22,7 @@ const payloadSchema = {
             },
         },
     },
-    required: ['student_id', 'class', 'results'],
+    required: ['student_id', 'class'],
 };
 
 const validate = ajv.compile(payloadSchema);
